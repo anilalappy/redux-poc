@@ -1,9 +1,11 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { continentActions } from "../../app/redux-store/continents/slice";
+import { selectTree } from "../../app/redux-store/continents/selectors";
 
 export const Africa = () => {
   const dispatch = useDispatch();
+  const localTree = useSelector(selectTree)
   const [value, setvalue] = useState("");
   const [id, setId] = useState(1);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +30,7 @@ export const Africa = () => {
       }}
     >
       <div>Africa</div>
+      <div>Tree :  {localTree ? "TRUE" : "FALSE"}</div>
       <div>
         <input type="text" value={value} onChange={(e) => handleChange(e)} />
       </div>

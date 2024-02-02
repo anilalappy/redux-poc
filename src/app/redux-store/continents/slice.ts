@@ -5,43 +5,42 @@ import { serviceActions } from './async-actions';
 export interface ContinentState {
   counterValue: number,
   continentMessage:string,
-  toDoDetails:any
+  toDoDetails:any,
+  tree:boolean,
+  treeValue:string
 }
 
 const initialState: ContinentState = {
   counterValue: 0,
   continentMessage:"Default value",
-  toDoDetails:{}
+  toDoDetails:{},
+  tree:false,
+  treeValue:"FALSE"
 }
+const {tree} =  initialState
+console.log("🚀 ~ initialState:",tree)
+// console.log("🚀 ~ initialState:", {...initialState,counterValue:150})
+
 
 export const continentsSlice = createSlice({
   name: 'continents',
   initialState,
   reducers: {
-    // increment: (state) => {
-    //   // Redux Toolkit allows us to write "mutating" logic in reducers. It
-    //   // doesn't actually mutate the state because it uses the Immer library,
-    //   // which detects changes to a "draft state" and produces a brand new
-    //   // immutable state based off those changes
-    //   state.counterValue += 1
-    // },
-    // decrement: (state) => {
-    //   state.counterValue -= 1
-    // },
-    // incrementByAmount: (state, action: PayloadAction<number>) => {
-    //   state.counterValue += action.payload
-    // },
     broadCastContinentMessage:(state,action:PayloadAction<string>)=>{
         state.continentMessage = action.payload
     },
     setToDoDetails:(state,action:PayloadAction<any>)=>{
         state.toDoDetails = action.payload
     },
+    changeFlag:(state)=>{
+      // state.treeValue = state.tree ? "TRUE":"FALSE"
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
 // export const { increment, decrement, incrementByAmount,broadCastContinentMessage } = continentsSlice.actions
 export const continentActions = {...continentsSlice.actions,...serviceActions}
+console.log("🚀 ~ continentActions:", continentActions)
 
 export const {reducer:continent} = continentsSlice
